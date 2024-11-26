@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipefy Backup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function startBackup() {
+            // Mostrar la barra de progreso
+            document.getElementById("progress-container").style.display = "block";
+            const progressBar = document.getElementById("progress-bar");
+
+            // Simulación de progreso
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress < 90) {  // Progreso simulado hasta 90%
+                    progress += 10;
+                    progressBar.style.width = progress + "%";
+                    progressBar.textContent = progress + "%";
+                } else {
+                    clearInterval(interval); // Detener progreso simulado
+                }
+            }, 500);
+        }
+    </script>
+</head>
+<body>
+    <h1>Generar Backup de Pipefy</h1>
+    <form method="POST" onsubmit="startBackup()">
+        <label for="pipe_id">PIPE ID:</label>
+        <input type="text" id="pipe_id" name="pipe_id" required>
+        <button type="submit">Generar Backup</button>
+    </form>
+
+    <!-- Barra de progreso -->
+    <div id="progress-container" class="progress-container">
+        <div id="progress-bar" class="progress-bar">0%</div>
+    </div>
+</body>
+</html>
